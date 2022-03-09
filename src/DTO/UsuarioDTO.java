@@ -41,5 +41,9 @@ public class UsuarioDTO {
     
     private int id;
     private String nome, user, senha;
+
+    public void getId(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }

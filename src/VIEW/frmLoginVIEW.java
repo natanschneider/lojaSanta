@@ -3,10 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package VIEW;
-
+ 
 import DTO.UsuarioDTO;
 import DAO.UsuarioDAO;
 import VIEW.frmPrincipalVIEW;
+import VIEW.frmCadastroVIEW;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
@@ -38,6 +39,7 @@ public class frmLoginVIEW extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtSenha = new javax.swing.JTextField();
         btnEntrarSistema = new javax.swing.JButton();
+        btnCadastre = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,6 +54,13 @@ public class frmLoginVIEW extends javax.swing.JFrame {
             }
         });
 
+        btnCadastre.setText("Cadastre-se");
+        btnCadastre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastreActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -60,7 +69,10 @@ public class frmLoginVIEW extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEntrarSistema, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnEntrarSistema, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnCadastre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(txtSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
                     .addComponent(txtUsuario)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -78,41 +90,49 @@ public class frmLoginVIEW extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnEntrarSistema, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(149, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEntrarSistema, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCadastre, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(147, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void btnEntrarSistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarSistemaActionPerformed
         try {
             String user, senha;
-
+         
             user = txtUsuario.getText();
             senha = txtSenha.getText();
-
+            
             UsuarioDTO objusuariodto = new UsuarioDTO();
 
             objusuariodto.setUser(user);
             objusuariodto.setSenha(senha);
-            
+
             UsuarioDAO objusuariodao = new UsuarioDAO();
             ResultSet rsusuariodao = objusuariodao.autentificaUsuario(objusuariodto);
-            
-            if(rsusuariodao.next()){
-                // Chamar tela principal
+
+            if (rsusuariodao.next()) {
                 frmPrincipalVIEW objfrmprincipalview = new frmPrincipalVIEW();
                 objfrmprincipalview.setVisible(true);
-                
+
                 dispose();
-            }else{
-                JOptionPane.showMessageDialog(null,"Usuario ou Senha incorretos!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuario ou Senha incorretos!");
             }
         } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null,"Tela login erro::" + erro.getMessage());
+            JOptionPane.showMessageDialog(null, "Tela login erro::" + erro.getMessage());
         }
     }//GEN-LAST:event_btnEntrarSistemaActionPerformed
+
+    private void btnCadastreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastreActionPerformed
+        frmCadastroVIEW objfrmcadastroview = new frmCadastroVIEW();
+        objfrmcadastroview.setVisible(true);
+        
+        dispose();
+    }//GEN-LAST:event_btnCadastreActionPerformed
 
     /**
      * @param args the command line arguments
@@ -150,10 +170,15 @@ public class frmLoginVIEW extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCadastre;
     private javax.swing.JButton btnEntrarSistema;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField txtSenha;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
+
+    String getText(String user) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
