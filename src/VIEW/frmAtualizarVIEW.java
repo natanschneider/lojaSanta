@@ -40,14 +40,8 @@ public class frmAtualizarVIEW extends javax.swing.JFrame {
         txtSenha = new javax.swing.JTextField();
         btnAtualizar = new javax.swing.JToggleButton();
         jLabel5 = new javax.swing.JLabel();
-        boxID = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
-        });
 
         btnVoltar.setText("VOLTAR");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -62,23 +56,11 @@ public class frmAtualizarVIEW extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("NOME");
 
-        txtNome.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                txtNomeMouseEntered(evt);
-            }
-        });
-
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("USUARIO");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("SENHA");
-
-        txtSenha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSenhaActionPerformed(evt);
-            }
-        });
 
         btnAtualizar.setText("ATUALIZAR");
         btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -88,18 +70,6 @@ public class frmAtualizarVIEW extends javax.swing.JFrame {
         });
 
         jLabel5.setText("ID DE CADASTRO");
-
-        boxID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NULL", "ID 1", "ID 2", "ID 3" }));
-        boxID.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                boxIDItemStateChanged(evt);
-            }
-        });
-        boxID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boxIDActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -120,8 +90,7 @@ public class frmAtualizarVIEW extends javax.swing.JFrame {
                         .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
                         .addComponent(txtUser)
                         .addComponent(txtSenha))
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(boxID, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(109, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -131,9 +100,7 @@ public class frmAtualizarVIEW extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(boxID, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(54, 54, 54)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -180,46 +147,6 @@ public class frmAtualizarVIEW extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Usuario atualizado com sucesso!");
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
-    private void txtNomeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNomeMouseEntered
-        //Campo
-    }//GEN-LAST:event_txtNomeMouseEntered
-
-    private void txtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSenhaActionPerformed
-
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        /* DefaultListModel lstModel = new DefaultListModel();
-        
-        boxID.removeAllItems();
-
-        for (int i = 0; i < lstModel.size(); i++){
-            
-            boxID.addItem(lstModel get(i).getID(id));
-            
-        } */
-    }//GEN-LAST:event_formWindowOpened
-
-    private void boxIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_boxIDActionPerformed
-
-    private void boxIDItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_boxIDItemStateChanged
-       /* String id;
-        int idB;
-        
-        id = boxID.getText();
-        
-        switch (idB){
-            case 1:
-                
-                break;
-            case 2:
-                
-                break;
-        } */
-    }//GEN-LAST:event_boxIDItemStateChanged
-
     /**
      * @param args the command line arguments
      */
@@ -256,7 +183,6 @@ public class frmAtualizarVIEW extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> boxID;
     private javax.swing.JToggleButton btnAtualizar;
     private javax.swing.JToggleButton btnVoltar;
     private javax.swing.JLabel jLabel1;
