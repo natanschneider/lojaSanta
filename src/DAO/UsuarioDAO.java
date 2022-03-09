@@ -57,7 +57,7 @@ public class UsuarioDAO {
         }
     }
     
-    public ResultSet listarUsuario(UsuarioDTO objlistaruser){
+    public ResultSet listarUsuario(){
         conn = new ConexaoDAO().conectaBD();
         String sql = ("SELECT id FROM usuario");
         
@@ -67,7 +67,22 @@ public class UsuarioDAO {
            return pstm.executeQuery();
            
         }catch(SQLException erro){
-            JOptionPane.showMessageDialog(null,"listarUsuario erro::" + erro.getMessage());
+            JOptionPane.showMessageDialog(null, "listarUsuario erro:: " + erro.getMessage());
+            return null;
+        }
+    }
+    
+    public ResultSet carregarCampos(){
+        conn = new ConexaoDAO().conectaBD();
+        String sql = ("SELECT * FROM usuario WHERE id = ?");
+        
+        try{               
+           PreparedStatement pstm = conn.prepareStatement(sql);
+           
+           return pstm.executeQuery();
+           
+        }catch(SQLException erro){
+            JOptionPane.showMessageDialog(null, "listarUsuario erro:: " + erro.getMessage());
             return null;
         }
     }

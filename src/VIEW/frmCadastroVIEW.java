@@ -6,8 +6,6 @@ package VIEW;
 
 import DTO.UsuarioDTO;
 import DAO.UsuarioDAO;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**

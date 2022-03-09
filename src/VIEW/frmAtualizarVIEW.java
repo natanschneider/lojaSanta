@@ -6,7 +6,10 @@ package VIEW;
 
 import DTO.UsuarioDTO;
 import DAO.UsuarioDAO;
+import java.util.Vector;
 import javax.swing.JOptionPane;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -19,6 +22,24 @@ public class frmAtualizarVIEW extends javax.swing.JFrame {
      */
     public frmAtualizarVIEW() {
         initComponents();
+        restaurarDadoscbxID();
+    }
+    
+    Vector<Integer> id = new Vector<Integer>();
+    
+    public void restaurarDadoscbxID() {
+        try {
+            
+            UsuarioDAO objusuariodao = new UsuarioDAO();
+            ResultSet rs = objusuariodao.listarUsuario();
+            
+            while (rs.next()) {
+                id.addElement(rs.getInt (1));
+                cbxID.addItem(rs.getString(1));   
+            }           
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "CarregarIDUser erro:: " + erro.getMessage());
+        }
     }
 
     /**
@@ -40,6 +61,7 @@ public class frmAtualizarVIEW extends javax.swing.JFrame {
         txtSenha = new javax.swing.JTextField();
         btnAtualizar = new javax.swing.JToggleButton();
         jLabel5 = new javax.swing.JLabel();
+        cbxID = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,6 +93,8 @@ public class frmAtualizarVIEW extends javax.swing.JFrame {
 
         jLabel5.setText("ID DE CADASTRO");
 
+        cbxID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECIONE" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -90,7 +114,9 @@ public class frmAtualizarVIEW extends javax.swing.JFrame {
                         .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
                         .addComponent(txtUser)
                         .addComponent(txtSenha))
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(cbxID, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)))
                 .addContainerGap(109, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -100,7 +126,9 @@ public class frmAtualizarVIEW extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbxID, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -185,6 +213,7 @@ public class frmAtualizarVIEW extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnAtualizar;
     private javax.swing.JToggleButton btnVoltar;
+    private javax.swing.JComboBox<String> cbxID;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
