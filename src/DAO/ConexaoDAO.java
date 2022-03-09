@@ -22,7 +22,7 @@ public class ConexaoDAO {
             conn =  DriverManager.getConnection(url);
             
         }catch(SQLException erro){
-            JOptionPane.showMessageDialog(null,"Esse é o erro::" + erro.getMessage());
+            JOptionPane.showMessageDialog(null,"ConexaoDAO::" + erro.getMessage());
         }
         
     return conn;

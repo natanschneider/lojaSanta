@@ -31,7 +31,7 @@ public class UsuarioDAO {
     
            return rs;
         }catch(SQLException erro){
-            JOptionPane.showMessageDialog(null,"UsuarioDAO erro::" + erro.getMessage());
+            JOptionPane.showMessageDialog(null,"autentificaUsuario erro::" + erro.getMessage());
             return null;
         }
     }
@@ -57,20 +57,17 @@ public class UsuarioDAO {
         }
     }
     
-    public ResultSet consultarUsuario(UsuarioDTO objconsultaruser){
+    public ResultSet listarUsuario(UsuarioDTO objlistaruser){
         conn = new ConexaoDAO().conectaBD();
-        try{
-           String sql = ("SELECT * FROM usuario WHERE id = ?");
-           
+        String sql = ("SELECT id FROM usuario");
+        
+        try{               
            PreparedStatement pstm = conn.prepareStatement(sql);
            
-           pstm.setInt(1, objconsultaruser.getId());
+           return pstm.executeQuery();
            
-           rs = pstm.executeQuery();
-    
-           return rs;      
         }catch(SQLException erro){
-            JOptionPane.showMessageDialog(null,"atualizarUsuario erro::" + erro.getMessage());
+            JOptionPane.showMessageDialog(null,"listarUsuario erro::" + erro.getMessage());
             return null;
         }
     }
