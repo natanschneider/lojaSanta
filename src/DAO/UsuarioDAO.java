@@ -14,7 +14,7 @@ import java.sql.PreparedStatement;
  */
 public class UsuarioDAO {
     Connection conn;
-    
+    PreparedStatement pstm;
     public ResultSet rs;
     
     public ResultSet autentificaUsuario(UsuarioDTO objusuariodto){
@@ -22,7 +22,7 @@ public class UsuarioDAO {
         try{
            String sql = "SELECT * FROM usuario WHERE user = ? AND senha = ?";
            
-           PreparedStatement pstm = conn.prepareStatement(sql);
+           pstm = conn.prepareStatement(sql);
            
            pstm.setString(1, objusuariodto.getUser());
            pstm.setString(2, objusuariodto.getSenha());
@@ -42,7 +42,7 @@ public class UsuarioDAO {
            String sql = "INSERT INTO usuario (nome, user, senha)" 
                 +  "VALUES (?, ?, ?)";
            
-           PreparedStatement pstm = conn.prepareStatement(sql);
+           pstm = conn.prepareStatement(sql);
            
            pstm.setString(1, objcadastraruser.getNome());
            pstm.setString(2, objcadastraruser.getUser());
@@ -62,7 +62,7 @@ public class UsuarioDAO {
         String sql = ("SELECT id FROM usuario");
         
         try{               
-           PreparedStatement pstm = conn.prepareStatement(sql);
+           pstm = conn.prepareStatement(sql);
            
            return pstm.executeQuery();
            
@@ -72,17 +72,25 @@ public class UsuarioDAO {
         }
     }
     
-    public ResultSet carregarCampos(){
-        conn = new ConexaoDAO().conectaBD();
+    public ResultSet carregarCampos(UsuarioDTO objusuariodto){
+        int id;
         String sql = ("SELECT * FROM usuario WHERE id = ?");
-        
-        try{               
-           PreparedStatement pstm = conn.prepareStatement(sql);
+                     
+        try{                 
+           pstm = conn.prepareStatement(sql);
            
-           return pstm.executeQuery();
+           pstm.setInt(1, objusuariodto.getId());
            
+           rs = pstm.executeQuery();
+           
+           UsuarioDTO objUsuarioDTO = new UsuarioDTO();
+           objUsuarioDTO.setNome(rs.getString("nome"));
+           objUsuarioDTO.setSenha(rs.getString("senha"));
+           objUsuarioDTO.setUser(rs.getString("user"));
+           
+           return rs;
         }catch(SQLException erro){
-            JOptionPane.showMessageDialog(null, "listarUsuario erro:: " + erro.getMessage());
+            JOptionPane.showMessageDialog(null, "carregarCampos erro:: " + erro.getMessage());
             return null;
         }
     }
@@ -93,7 +101,7 @@ public class UsuarioDAO {
            String sql = ("UPDATE usuario SET nome = ?, user = ?, senha = ? "
                    + "WHERE id = ?");
            
-           PreparedStatement pstm = conn.prepareStatement(sql);
+           pstm = conn.prepareStatement(sql);
            
            pstm.setString(1, objatualizaruser.getNome());
            pstm.setString(2, objatualizaruser.getUser());

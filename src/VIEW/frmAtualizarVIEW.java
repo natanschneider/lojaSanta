@@ -94,6 +94,11 @@ public class frmAtualizarVIEW extends javax.swing.JFrame {
         jLabel5.setText("ID DE CADASTRO");
 
         cbxID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECIONE" }));
+        cbxID.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxIDItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -174,6 +179,29 @@ public class frmAtualizarVIEW extends javax.swing.JFrame {
         objusuariodao.atualizarUsuario(objatualizaruser);
         JOptionPane.showMessageDialog(null, "Usuario atualizado com sucesso!");
     }//GEN-LAST:event_btnAtualizarActionPerformed
+
+    private void cbxIDItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxIDItemStateChanged
+        String nome = null, user = null, senha = null;
+        int id;
+        
+        id = (int) cbxID.getSelectedItem();
+              
+        try {
+            
+            UsuarioDTO objusuariodto = new UsuarioDTO(); 
+            UsuarioDAO objusuariodao = new UsuarioDAO();
+            ResultSet rs = objusuariodao.carregarCampos(objusuariodto);
+            objusuariodto.setId(id);
+            
+            while (rs.next()) {
+                txtNome.setText(nome);
+                txtSenha.setText(senha);
+                txtUser.setText(user);
+            }            
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "CarregarIDUser erro:: " + erro.getMessage());
+        }
+    }//GEN-LAST:event_cbxIDItemStateChanged
 
     /**
      * @param args the command line arguments
